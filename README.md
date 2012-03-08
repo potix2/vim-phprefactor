@@ -1,6 +1,6 @@
 # PHP Refactoring Browser for Vim
 
-phprefactor is a tiny refactoring browser for PHP. It runs on the powerful editor *Vim*.
+phprefactor is a tiny refactoring browser for PHP. It runs on the powerful editor **Vim**.
 
 Installation
 ------------
@@ -17,16 +17,20 @@ Usage
 
 ![](http://potix2.github.com/images/vim-phprefactor/screen1.png)
 
+Change the cursor position to a local variable.
+
 ![](http://potix2.github.com/images/vim-phprefactor/screen2.png)
 
-+ Change the cursor position to a local variable.
-+ Press <Leader>prlv (<Leader> is mapped '\' if you didn't change the default leader setting.)
-+ Input a new variable name and press enter.
+Type ```<Leader>prlv``` (```<Leader>``` is mapped '\' if you didn't change the default leader setting.)
+
+And input a new variable name and press enter.
 
 Defaut key mappings
 -------------------
 
-  <Leader>prlv  - Rename Local Variable  (normal mode)
+```
+<Leader>prlv  - Rename Local Variable  (normal mode)
+```
 
 License
 -------
