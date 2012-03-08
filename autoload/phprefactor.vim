@@ -1,17 +1,18 @@
 " phprefactor - Refactoring browser for PHP
-" Version: 0.0.0
+" Version: 0.1.0
 " Copyright (C) 2012 Katsunori Kanda <https://github.com/potix2/>
-" License:
+" License: MIT License
 
-function! phprefactor#command(config, use_range, line1, line2)
+" Interfaces {{{1
+function! phprefactor#command(config, use_range, line1, line2) "{{{2
     call phprefactor#rename_local_variable()
 endfunction
 
-function! phprefactor#get_variable_name()
+function! phprefactor#get_variable_name() "{{{2
     return expand('<cword>')
 endfunction
 
-function! phprefactor#in_comment_block()
+function! phprefactor#in_comment_block() "{{{2
     let cursor_position = getpos(".")
     try
         if search('\/\/', 'b', line('.')) > 0
@@ -42,7 +43,7 @@ function! phprefactor#in_comment_block()
 
 endfunction
 
-function! s:move_to_left_brace_of_current_function_block()
+function! s:move_to_left_brace_of_current_function_block() "{{{2
     let cursor_position = getpos(".")
     while search('function', 'b', line('w0')) > 0
         if !phprefactor#in_comment_block()
@@ -63,7 +64,7 @@ function! s:move_to_left_brace_of_current_function_block()
     return 0
 endfunction
 
-function! phprefactor#get_range_for_function()
+function! phprefactor#get_range_for_function() "{{{2
     let cursor_position = getpos(".")
     try
         let block_start = s:move_to_left_brace_of_current_function_block()
@@ -80,24 +81,44 @@ function! phprefactor#get_range_for_function()
     endtry
 endfunction
 
-" Synopsis:
-"   Rename the selected local variable 
-function! phprefactor#rename_local_variable()
+function! phprefactor#rename_local_variable() "{{{2
+    let name = input("Rename to: ")
+    if name == ""
+        return
+    endif
+
+    call s:rename_local_variable(name)
+endfunction
+
+" Internals {{{1
+function! s:rename_local_variable(name) " {{{2
+    if a:name == ""
+        return
+    endif
+
     let original_var_name = phprefactor#get_variable_name()
     " TODO: verify whether the returned variable is a local variable or not.
-    let name = input("Rename to: ")
 
-    " Find the start and end of the current block
     let [block_start, block_end] = phprefactor#get_range_for_function()
 
     " Rename the variable within the range of the block
     let lnum = block_start
     while lnum <= block_end
         let oldline = getline(lnum)
-        let newline = substitute(oldline,'$' . original_var_name,'$' . name,'g')
+        let newline = substitute(oldline,'\($' . original_var_name . '\)\(\W\+\)','$' . a:name . '\2','g')
         call setline(lnum, newline)
         let lnum = lnum + 1
     endwhile
+endfunction
+
+" for vspec {{{1
+function! phprefactor#sid() "{{{2
+    return maparg('<SID>', 'n')
+endfunction
+nnoremap <SID> <SID>
+
+function! phprefactor#scope() "{{{2
+    return s:
 endfunction
 
 " __END__ "{{{1
