@@ -1,9 +1,11 @@
 # PHP Refactoring Browser for Vim
 
-phprefactor is a tiny refactoring browser for PHP. It runs on the powerful editor **Vim**.
+*phprefactor* is a tiny refactoring browser for PHP. It runs on the powerful editor **Vim**.
 
 Installation
 ------------
+
+If you have already installed [pathogen](https://github.com/tpope/vim-pathogen), input following commands.
 
 ```
 $cd ~/.vim/bundle
