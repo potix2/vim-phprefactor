@@ -23,15 +23,22 @@ Change the cursor position to a local variable.
 
 ![](http://potix2.github.com/images/vim-phprefactor/screen2.png)
 
-Type ```<Leader>prlv``` (```<Leader>``` is mapped '\' if you didn't change the default leader setting.)
+Type ```<Leader>rr``` (```<Leader>``` is mapped '\' if you didn't change the default leader setting.)
 
 And input a new variable name and press enter.
+
+### Introduce Local Variable
+
+Select an expression you want to extract as a local variable in visual mode, then type ```<Leader>rv```.
+
+And input a name for the extracted variable.
 
 Defaut key mappings
 -------------------
 
 ```
-<Leader>prlv  - Rename Local Variable  (normal mode)
+<Leader>rr  - Rename Local Variable  (normal mode)
+<Leader>rv  - Introduce Local Variable  (visual mode)
 ```
 
 License
