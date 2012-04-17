@@ -1,4 +1,3 @@
-tests := common.vim extract_local_variable.vim rename_local_variable.vim
 rtp := ~/.vim .
 
 spec:
