@@ -243,6 +243,16 @@ function! s:extract_local_variable(name) " {{{2
     normal! $pa;
 endfunction
 
+function! s:inline_local_variable() " {{{2
+    normal w"ayw
+    let var_name = substitute(getreg('a'), ' ', '', 'g')
+"    normal 2w"ay/;
+    let exp = "1 + 2"
+    normal dd
+    let newline = substitute(getline(1),'$'.var_name, exp, 'g')
+    call setline(1, newline)
+endfunction
+
 " for vspec {{{1
 function! phprefactor#sid() "{{{2
     return maparg('<SID>', 'n')
